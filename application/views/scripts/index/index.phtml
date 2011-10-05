@@ -1,0 +1,35 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/application.js"></script>
+<ul>
+<?php foreach ($this->tweets as $tweet):?>
+    <li>
+        <h4>@<?php echo $tweet->getName()?> // <?php echo date('Y-m-d H:i:s', $tweet->getTimeStamp())?></h4>
+        <p><?php echo $tweet->getMessage()?></p>
+        <ul>
+            <?php foreach ($tweet as $_tweet):?>
+            <li>
+                <h4>@<?php echo $_tweet->getName()?> // <?php echo date('Y-m-d H:i:s', $tweet->getTimeStamp())?></h4>
+                <p><?php echo $_tweet->getMessage()?></p>
+            </li>
+            <?php endforeach;?>
+        </ul>
+
+
+        <form action="/index/save" method="post" style="border:1px solid blue">
+            <legend>Comment message <?php echo $tweet->getId()?></legend>
+            <input type="hidden" name="id" value="<?php echo $tweet->getId()?>" />
+            <label for="name">Name</label><input type="text" name="name" /><br />
+            <label for="message">Mesage</label><textarea name="message"></textarea><br />
+            <input type="submit" value="send" />
+        </form>
+    </li>
+<?php endforeach;?>
+</ul>
+
+<form action="/index/save" method="post" style="border:1px solid green">
+    <legend>Main post form</legend>
+    <label for="name">Name</label><input type="text" name="name" /><br />
+    <label for="message">Mesage</label><textarea name="message"></textarea><br />
+    <input type="submit" value="send" />
+</form>
+
